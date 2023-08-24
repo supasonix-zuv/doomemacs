@@ -5,6 +5,7 @@
 
 (defvar +doom-dashboard-functions
   '(doom-dashboard-widget-banner
+    ;random-splash-image-set
     doom-dashboard-widget-shortmenu
     doom-dashboard-widget-loaded
     doom-dashboard-widget-footer)
@@ -12,17 +13,21 @@
 dashboard. These functions take no arguments and the dashboard buffer is current
 while they run.")
 
-(defvar +doom-dashboard-banner-file "default.png"
+(defvar +doom-dashboard-banner-file "bcfa3b9019def47e8d78009a734c0f38de0d8bd8f553e6834affa66172f147b4.png"
   "The path to the image file to be used in on the dashboard. The path is
 relative to `+doom-dashboard-banner-dir'. If nil, always use the ASCII banner.")
 
-(defvar +doom-dashboard-banner-dir (concat (dir!) "/banners/")
+;(require 'random-splash-image)
+;(setq random-splash-image-dir (concat (getenv "HOME") "/.local/share/mascots/"))
+;l(random-splash-image-set)
+
+(defvar +doom-dashboard-banner-dir (concat (dir!) "~/.local/share/mascots")
   "Where to look for `+doom-dashboard-banner-file'.")
 
 (defvar +doom-dashboard-ascii-banner-fn #'doom-dashboard-draw-ascii-banner-fn
   "The function used to generate the ASCII banner on Doom's dashboard.")
 
-(defvar +doom-dashboard-banner-padding '(0 . 4)
+(defvar +doom-dashboard-banner-padding '(0 . 1)
   "Number of newlines to pad the banner with, above and below, respectively.")
 
 (defvar +doom-dashboard-inhibit-refresh nil
@@ -57,6 +62,9 @@ Possible values:
                  ((require 'desktop nil t)
                   (file-exists-p (desktop-full-file-name))))
      :action doom/quickload-session)
+    ("Open scratchpad"
+     :icon (all-the-icons-octicon "pencil" :face 'doom-dashboard-menu-title)
+     :action doom/switch-to-scratch-buffer)
     ("Open org-agenda"
      :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
      :when (fboundp 'org-agenda)
